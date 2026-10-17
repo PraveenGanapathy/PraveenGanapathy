@@ -38,7 +38,7 @@ I build data pipelines on **Azure** and **Databricks**, and web apps with **Reac
   <a href="https://github.com/PraveenGanapathy/careercentreanalytics"><img src="assets/card-career.svg" width="49%" alt="Career Centre Analytics" /></a>
   <a href="https://va-hw-1.vercel.app/"><img src="assets/card-docviz.svg" width="49%" alt="DocViz (live demo)" /></a>
   <a href="https://github.com/PraveenGanapathy/Bankmarketing"><img src="assets/card-bank.svg" width="49%" alt="Bank Marketing" /></a>
-  <a href="https://rpg18.pythonanywhere.com/catalog/"><img src="assets/card-library.svg" width="49%" alt="Local Library (live demo)" /></a>
+  <a href="https://github.com/PraveenGanapathy/locallibrary"><img src="assets/card-library.svg" width="49%" alt="Local Library" /></a>
   <a href="https://github.com/PraveenGanapathy/vahw2"><img src="assets/card-viz.svg" width="49%" alt="Sales Trends Viz" /></a>
 </p>
 
@@ -46,7 +46,7 @@ I build data pipelines on **Azure** and **Databricks**, and web apps with **Reac
 <summary><b>📂 More projects</b></summary>
 <br />
 
-- [**DocViz source**](https://github.com/PraveenGanapathy/DocViz) and [**Local Library source**](https://github.com/PraveenGanapathy/locallibrary)
+- [**DocViz source**](https://github.com/PraveenGanapathy/DocViz)
 - [**appletv_d3js**](https://github.com/PraveenGanapathy/appletv_d3js): visualization using D3.js
 - [**playlistimporter**](https://github.com/PraveenGanapathy/playlistimporter): imports YouTube playlists to other platforms
 - [**portfolio**](https://github.com/PraveenGanapathy/portfolio): my personal site
