@@ -1,0 +1,56 @@
+name: Generate profile graphics
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # daily at 00:00 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate snake SVG
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            build/snk.svg?color_snake=#e879f9&color_dots=#131a33,#0e4f5c,#0e7490,#06b6d4,#67e8f9
+
+      - name: Fetch score (contributions in the last year)
+        id: score
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          total=$(gh api graphql -f query='query($u:String!){user(login:$u){contributionsCollection{contributionCalendar{totalContributions}}}}' \
+            -f u='${{ github.repository_owner }}' \
+            --jq '.data.user.contributionsCollection.contributionCalendar.totalContributions' || true)
+          echo "total=$total" >> "$GITHUB_OUTPUT"
+
+      - name: Wrap snake in game screen
+        run: |
+          mkdir -p dist
+          python3 .github/scripts/snake_game.py build/snk.svg dist/snake-game.svg "${{ steps.score.outputs.total }}" "Praveen"
+
+      - name: Render stats, languages, and visits cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git fetch --depth=1 origin output && git show origin/output:visits.json > build/visits.json || true
+          python3 .github/scripts/profile_cards.py '${{ github.repository_owner }}' dist build/visits.json
+
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v5
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
