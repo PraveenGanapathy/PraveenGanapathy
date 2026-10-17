@@ -283,7 +283,7 @@ def main():
     (OUT / "languages.svg").write_text(languages_card(u))
 
     history = {}
-    if PREV and PREV.is_file():
+    if PREV and PREV.is_file() and PREV.read_text().strip():
         history = json.loads(PREV.read_text())
     try:
         m = re.search(r'aria-label="[^"]*?([\d,]+)"', fetch(HITS_URL))
